@@ -1,58 +1,48 @@
-import javax.swing.*;
 import java.awt.*;
 
 
 
 public class Main {
 
+    private static int gameState;
+    private static boolean gameRunning = true;
+    public static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    public static int halfScreenWidth = screenSize.width / 2;
+    public static int halfScreenHeight = screenSize.height / 2;
 
-    public static class primaryWindow{
-        public primaryWindow()
-        {
-            //Initialization of screen
-            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-            int halfScreenWidth = screenSize.width / 2;
-            int halfScreenHeight = screenSize.height / 2;
-            Frame f = new Frame("My Adventure");
-
-
-            //The start screen with text/buttons. Will be moved to a separate file and called when needed.
-            JButton start = new JButton();
-            start.setText("Start Game");
-            start.setBounds(halfScreenWidth, halfScreenHeight - 150, 120, 50);
-
-            JButton load = new JButton();
-            load.setText("Load Game");
-            load.setBounds(halfScreenWidth, halfScreenHeight - 75, 120, 50);
-
-            JButton exit = new JButton();
-            exit.setText("Exit Game");
-            exit.setBounds(halfScreenWidth, halfScreenHeight, 120, 50);
-
-            JLabel l1 = new JLabel();
-            l1.setText("<html><h1>Adventure Game</h1></html>");
-
-            l1.setBounds(halfScreenWidth - 40, 50, 250, 80);
+    public static void main(String ar[]) {
+        gameState = 0;
+        gameManager();
 
 
 
-            f.add(l1);
-            f.add(start);
-            f.add(load);
-            f.add(exit);
+    }
 
-            //The start screen with text/buttons. Will be moved to a separate file and called when needed.
 
-            f.setSize(screenSize.width, screenSize.height);
-            f.setLayout(null);
-            f.setVisible(true);
-
+    //Master method to change screens based on gameState.
+    public static void gameManager(){
+        if (gameRunning){
+            if(gameState == -1){
+                System.exit(0);
+            }
+            if (gameState == 0){
+                new IntroScreen();
+            }
         }
     }
 
-
-    public static void main(String ar[]) {
-        new primaryWindow();
-
+    public static int getGameState(){
+        return gameState;
     }
+    public static void setGameState(int value){
+        gameState = value;
+    }
+
+    public static boolean getGameRunning(){
+        return gameRunning;
+    }
+    public static void setGameRunning(boolean value){
+        gameRunning = value;
+    }
+
 }
